@@ -5,11 +5,12 @@ class Auth_model extends CI_Model{
         parent::__construct();
     }
 
+
     public function register(){
         $data = [
-            'nama' => $this->input->post('nama'),
-            'alamat' => $this->input->post('alamat'),
-            'email' => $this->input->post('email'),
+            'nama' => htmlspecialchars($this->input->post('nama', true)),
+            'alamat' =>htmlspecialchars($this->input->post('alamat', true)),
+            'email' => htmlspecialchars($this->input->post('email', true)),
             'image' => 'default.jpg',
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
             'role_id' => 2,
@@ -20,4 +21,5 @@ class Auth_model extends CI_Model{
 
         $this->db->insert('user', $data);
     }
+
 }
